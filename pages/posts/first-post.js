@@ -25,10 +25,10 @@ const FirstPost = () => {
 			</Link>
 
 			<style jsx>{`
-					{
+				 {
 					/* This style tag affect only the component its inside */
 				}
-				background: yellow;
+				background: aliceblue;
 			`}</style>
 		</Layout>
 	);
