@@ -19,7 +19,11 @@ const FirstPost = () => {
 				width={144}
 				alt="Daniel Ahn"
 			/>
-			<h1>First Post</h1>
+			<section>
+				<h1>First Post</h1>
+				<p>This is the paragraph area of the first post</p>
+			</section>
+
 			<Link href="/">
 				<a>Back to Home</a>
 			</Link>

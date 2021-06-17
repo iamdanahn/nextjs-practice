@@ -34,7 +34,9 @@ When exporting a page component, an `async` function called `getStaticProps` can
    - getStaticProps runs at production's build time 
    - Inisde the function, external data can be fetched and sent as props to the page
 
-1. getStaticProps runs/resolves first, then the return of props is passed into the component
+* `getStaticProps` runs/resolves first, then the return of props is passed into the component
+* It only runs server-side, never client-side
+* `gSP` can only be exported from a **page**. Cannot export it from non-page files.
 
 Notes: looks like `getStaticProps` is in the same file as the component needing the props/external info 
 
@@ -52,3 +54,32 @@ export async function getStaticProps() {
   }
 }
 ```
+
+NOTE: `getSortedPostsData` is in a separate file from `getStaticProps`, but
+`gSP` imports `gSPD` from outside
+External APIs can be fetched like below:
+```js
+export async function getSortedPostsData() {
+  // Instead of the file system,
+  // fetch post data from an external API endpoint
+  const res = await fetch('..')
+  return res.json()
+}
+```
+
+
+Database queries like below:
+```js
+import someDatabaseSDK from 'someDatabaseSDK'
+
+const databaseClient = someDatabaseSDK.createClient(...)
+
+export async function getSortedPostsData() {
+  // Instead of the file system,
+  // fetch post data from a database
+  return databaseClient.query('SELECT posts...')
+}
+```
+
+
+## Server-side Rendering with Data
