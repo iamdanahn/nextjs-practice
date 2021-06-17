@@ -36,6 +36,8 @@ When exporting a page component, an `async` function called `getStaticProps` can
 
 1. getStaticProps runs/resolves first, then the return of props is passed into the component
 
+Notes: looks like `getStaticProps` is in the same file as the component needing the props/external info 
+
 ```js
 export default function Home(props) { ... }
 
