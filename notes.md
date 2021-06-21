@@ -83,3 +83,14 @@ export async function getSortedPostsData() {
 
 
 ## Server-side Rendering with Data
+Fetching data at "request time" vs build time
+`getServerSideProps()` - fetches data at request time
+```js
+export async function getServerSideProps(context) {
+  return {
+    props: {
+      // props for your component
+    }
+  }
+}
+```
