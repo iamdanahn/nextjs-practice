@@ -82,9 +82,10 @@ export async function getSortedPostsData() {
 ```
 
 
-## Server-side Rendering with Data
+### Server-side Rendering with Data
 Fetching data at "request time" vs build time
 `getServerSideProps()` - fetches data at request time
+
 ```js
 export async function getServerSideProps(context) {
   return {
@@ -92,5 +93,29 @@ export async function getServerSideProps(context) {
       // props for your component
     }
   }
+}
+```
+`context` contains request specific paramters
+
+### Client-side Rendering
+* Statically generate parts of the page that do not need external data
+* After page loads, fetch external data from the client using JS and populate rest of the page
+
+Use cases: Dashboards - private info thats user specific and not SEO relevant
+
+
+### SWR - custom hook
+Highly rec if fetching on client-side. It handles caching, revalidation, focus tracking, refetching on interval, and more.
+Documentation: https://swr.vercel.app/
+
+```js
+import useSWR from 'swr'
+
+function Profile() {
+  const { data, error } = useSWR('/api/user', fetch)
+
+  if (error) return <div>failed to load</div>
+  if (!data) return <div>loading...</div>
+  return <div>hello {data.name}!</div>
 }
 ```
